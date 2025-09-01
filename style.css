@@ -1,0 +1,211 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fafafa;
+}
+
+#toolbar {
+  background: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap; /* wrap on small screens */
+  justify-content: space-around;
+  align-items: center;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+#toolbar select,
+#toolbar input[type="color"],
+#toolbar input[type="number"],
+#toolbar button {
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  background: #f9f9f9;
+}
+
+.tool-btn.active {
+  background: #007bff;
+  color: white;
+}
+
+#pdf-container {
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 100%;
+  height: calc(100vh - 120px);
+  margin: 0 auto;
+  position: relative;
+  overflow: auto;
+  background: white;
+}
+
+.text-box {
+  position: absolute;
+  border: 1px dashed #333;
+  padding: 4px;
+  min-width: 50px;
+  min-height: 20px;
+  cursor: move;
+  user-select: text;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  border-radius: 4px;
+  z-index: 5;
+  touch-action: none; /* allow custom pointer-based dragging */
+}
+
+.shape-box {
+  position: absolute;
+  z-index: 4;
+  user-select: none;
+  touch-action: none;
+  cursor: move;
+}
+
+.resize-handle {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
+  cursor: se-resize;
+  user-select: none;
+}
+
+.shape-box.selected {
+  outline: 2px dashed #4f46e5;
+  outline-offset: 1px;
+}
+
+.delete-handle {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.text-box .delete-handle {
+  top: -8px;
+  right: -8px;
+}
+
+@media (max-width: 600px) {
+  #toolbar {
+    gap: 4px;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  #toolbar select,
+  #toolbar input,
+  #toolbar button {
+    font-size: 12px;
+    padding: 3px 4px;
+  }
+
+  #pdf-container {
+    height: calc(100vh - 100px);
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+}
+
+/* Toolbar container */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Inputs, selects & buttons */
+.toolbar select,
+.toolbar input[type="number"],
+.toolbar button {
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  min-width: 60px;
+}
+
+.toolbar button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.toolbar button:active {
+  background: #0056b3;
+}
+
+/* Editor area */
+.editor {
+  padding: 10px;
+  font-size: 14px;
+  background: #fff;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 300px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .toolbar {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .toolbar select,
+  .toolbar input[type="number"] {
+    flex: 1;
+    min-width: 50px;
+  }
+
+  .toolbar button {
+    flex-shrink: 0;
+  }
+}
+
+/* Remove extra padding/forced canvas scaling causing misalignment */
+#pdf-container {
+  max-width: 100%;
+  overflow: auto;
+}
+
+#pdf-container canvas {
+  width: auto !important;
+  height: auto !important;
+  margin: 0;
+  display: block;
+  box-shadow: none;
+}

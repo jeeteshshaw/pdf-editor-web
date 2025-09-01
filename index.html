@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Toolbar -->
+    <div
+      class="flex flex-wrap items-center gap-2 p-3 bg-white shadow-md sticky top-0 z-10"
+    >
+      <button
+        id="tool-shape"
+        class="tool-btn px-3 py-1 text-sm rounded-lg bg-gray-500 text-white active:bg-gray-600"
+      >
+        []
+      </button>
+      <button
+        id="tool-text"
+        class="tool-btn px-3 py-1 text-sm rounded-lg bg-gray-500 text-white active:bg-gray-600"
+      >
+        [A]
+      </button>
+
+      <div
+        id="shape-tool-options"
+        class="flex flex-wrap items-center gap-2 p-3 bg-white shadow-md sticky top-0 z-10 hidden"
+      >
+        <select id="shape-tool" class="text-sm border rounded px-2 py-1">
+          <option value="">Shapes</option>
+          <option value="rect">Rectangle</option>
+          <option value="circle">Circle</option>
+          <option value="line">Line</option>
+        </select>
+
+        <label class="text-xs flex items-center gap-1">
+          <span>Border</span>
+          <input
+            type="color"
+            id="shape-border"
+            value="#000000"
+            class="w-6 h-6 border rounded"
+          />
+        </label>
+
+        <label class="text-xs flex items-center gap-1">
+          <span>Fill</span>
+          <input
+            type="color"
+            id="shape-fill"
+            value="#ffffff"
+            class="w-6 h-6 border rounded"
+          />
+        </label>
+
+        <label class="text-xs flex items-center gap-1">
+          <span>Transparent Fill</span>
+          <input type="checkbox" id="shape-fill-transparent" class="w-4 h-4" />
+        </label>
+      </div>
+      <div
+        id="text-tool-options"
+        class="flex flex-wrap items-center gap-2 p-3 bg-white shadow-md sticky top-0 z-10 hidden"
+      >
+        <label class="text-xs flex items-center gap-1">
+          <span>Text</span>
+          <input
+            type="color"
+            id="text-color"
+            value="#ff0000"
+            class="w-6 h-6 border rounded"
+          />
+        </label>
+
+        <label class="text-xs flex items-center gap-1">
+          <span>BG</span>
+          <input
+            type="color"
+            id="bg-color"
+            value="#ffffff"
+            class="w-6 h-6 border rounded"
+          />
+        </label>
+
+        <label class="text-xs flex items-center gap-1">
+          <span>Transparent BG</span>
+          <input type="checkbox" id="bg-transparent" class="w-4 h-4" />
+        </label>
+
+        <select id="font-family" class="text-sm border rounded px-2 py-1">
+          <option value="Helvetica">Helvetica</option>
+          <option value="TimesRoman">Times</option>
+          <option value="Courier">Courier</option>
+        </select>
+
+        <select id="font-weight" class="text-sm border rounded px-2 py-1">
+          <option value="normal">Normal</option>
+          <option value="bold">Bold</option>
+        </select>
+
+        <select id="font-style" class="text-sm border rounded px-2 py-1">
+          <option value="normal">Normal</option>
+          <option value="italic">Italic</option>
+        </select>
+
+        <input
+          type="number"
+          id="font-size"
+          value="16"
+          class="w-16 text-sm border rounded px-2 py-1"
+        />
+      </div>
+
+      <div class="position items-center gap-1">
+        <button
+          id="prev-page"
+          class="px-3 py-1 text-sm rounded-lg bg-gray-200 active:bg-gray-300"
+        >
+          Prev
+        </button>
+        <input
+          type="number"
+          id="page-number"
+          value="1"
+          min="1"
+          class="w-16 text-sm border rounded px-2 py-1 text-center"
+        />
+        <span id="page-count" class="text-sm text-gray-600">/ 1</span>
+        <button
+          id="next-page"
+          class="px-3 py-1 text-sm rounded-lg bg-gray-200 active:bg-gray-300"
+        >
+          Next
+        </button>
+      </div>
+
+      <button
+        id="download"
+        class="px-3 py-1 text-sm rounded-lg bg-green-500 text-white active:bg-green-600"
+      >
+        Export
+      </button>
+    </div>
+
+    <!-- File Upload -->
+    <div class="p-3">
+      <input
+        type="file"
+        id="pdf-upload"
+        accept=".pdf"
+        class="w-full text-sm border rounded p-2"
+      />
+    </div>
+
+    <!-- PDF Container -->
+    <div
+      id="pdf-container"
+      class="relative mx-auto bg-white border rounded shadow w-full max-w-2xl h-[80vh] overflow-auto"
+    ></div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
