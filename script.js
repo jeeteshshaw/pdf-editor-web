@@ -1165,10 +1165,24 @@ document.getElementById("download").addEventListener("click", async () => {
 
     const newPdfBytes = await pdfLibDoc.save();
     const blob = new Blob([newPdfBytes], { type: "application/pdf" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "edited.pdf";
-    link.click();
+        if (window.ReactNativeWebView) {
+      // Convert PDF to base64 and send to app
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        window.ReactNativeWebView.postMessage(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    } else {
+      // Normal browser download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "edited.pdf";
+      link.click();
+    }
+    // const link = document.createElement("a");
+    // link.href = URL.createObjectURL(blob);
+    // link.download = "edited.pdf";
+    // link.click();
   } catch (err) {
     console.error("pdf-lib failed:", err);
     alert("Export failed. See console.");
